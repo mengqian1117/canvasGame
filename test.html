@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>201803JS</title>
+</head>
+<body>
+<canvas id="canvas" style="background-color: green" width="400" height="600"></canvas>
+</body>
+</html>
+<script>
+  let canvas=document.getElementById("canvas");
+  //创建一个绘制环境 2d环境
+  let draw=canvas.getContext("2d");
+  //draw.drawImage(真实的图片,x1,x2)
+  let img=new Image();
+  // img.src="images/bird0_1.png";
+  // console.log(draw);
+  // draw.drawImage(img,100,100);
+
+  //draw.drawImage(真实的图片,x1,y1,w1,h1,x2,y2,w2,h2)
+    //x1,y1,w1,h1, :截取图片的
+    //x2,y2,w2,h2 在画布上呈现图片
+
+
+  img.src="images/bg_day.png";
+  let x=0;
+  setInterval(()=>{
+    draw.clearRect(0,0,canvas.width,canvas.height);
+    x+=10;
+    draw.drawImage(img,0,256,288,256,x,0,100,100);
+  },200)
+
+</script>
