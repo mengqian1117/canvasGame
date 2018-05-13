@@ -27,7 +27,9 @@ class Bird {
     this.y2=this.y+12;
 
     if(this.y>=game.canvas.height-game.allImg["land"].height){
-      this.y=game.canvas.height-game.allImg["land"].height;
+      document.getElementById("die").play();
+      game.SM.enter(3);
+
     }
   };
   render(){
@@ -41,5 +43,6 @@ class Bird {
     this.changeY=6;
     this.rotate=-1.2;
     this.status="up";
+    document.getElementById("wing").play();
   }
 }

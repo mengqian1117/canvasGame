@@ -11,6 +11,9 @@ class Game {
     this.frame=0;
     this.score=0;
     this.scene=0;
+    if(!localStorage.getItem("FB")){
+      localStorage.setItem("FB","[]");
+    }
     this.imgLoad();
   };
   clear(){
@@ -19,9 +22,10 @@ class Game {
   };
   start(){
     this.SM=new SceneManager();
-    this.SM.enter(1);
+    this.SM.enter(this.scene);
     this.timer=setInterval(()=>{
       this.frame++;
+      this.clear();
       this.SM.updateAndRender();
     },20)
   };

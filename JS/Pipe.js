@@ -27,12 +27,15 @@ class Pipe {
     this.y2=this.h1+this.space;
     //碰撞检测
     if(game.bird.x2>=this.x1&&game.bird.x1<=this.x2&&(game.bird.y1<=this.y1||game.bird.y2>=this.y2)){
-      clearInterval(game.timer);
+      game.SM.enter(3);
+      document.getElementById("hit").play();
+      document.getElementById("die").play();
     }
     //加分
     if(this.done&&game.bird.x1>this.x2){
       game.score++;
       this.done=false;
+      document.getElementById("point").play();
     }
   };
   render(){
