@@ -8,7 +8,9 @@ class Game {
     this.canvas.width=W;
     this.canvas.height=H;
     this.timer=null;
-    this.imgLoad()
+    this.frame=0;
+    this.imgLoad();
+    this.bindEvent();
   };
   clear(){
     //清屏的
@@ -16,11 +18,27 @@ class Game {
   };
   start(){
     this.bg=new Background();
+    this.land=new Land();
+    this.pipeArr=[];
+    this.bird=new Bird();
     this.timer=setInterval(()=>{
+      this.frame++;
       //每一帧都要清楚上一帧的内容
-      this.clear();
+      //this.clear();
       this.bg.update();
       this.bg.render();
+      this.land.update();
+      this.land.render();
+      //将数组中存放的管子渲染出来
+      if (this.frame%200==0){
+        new Pipe();
+      }
+      this.pipeArr.forEach((item)=>{
+        item.update();
+        item.render();
+      });
+      this.bird.update();
+      this.bird.render();
     },20)
   };
   imgLoad(){
@@ -70,6 +88,11 @@ class Game {
         this.allImg[key]=img;
         if(count>=total) this.start();
       }
+    }
+  };
+  bindEvent(){
+    this.canvas.onclick=()=>{
+      this.bird.fly();
     }
   }
 }
