@@ -7,6 +7,7 @@ class Pipe {
     this.h2=game.canvas.height-game.allImg["land"].height-this.h1-this.space;
     this.x=game.canvas.width;
     this.speed=1;
+    this.done=true;
     //每new一个管子放进数组中
     game.pipeArr.push(this);
   };
@@ -19,6 +20,20 @@ class Pipe {
       }
     }
     this.x-=this.speed;
+
+    this.x1=this.x;
+    this.x2=this.x+this.w;
+    this.y1=this.h1;
+    this.y2=this.h1+this.space;
+    //碰撞检测
+    if(game.bird.x2>=this.x1&&game.bird.x1<=this.x2&&(game.bird.y1<=this.y1||game.bird.y2>=this.y2)){
+      clearInterval(game.timer);
+    }
+    //加分
+    if(this.done&&game.bird.x1>this.x2){
+      game.score++;
+      this.done=false;
+    }
   };
   render(){
 
